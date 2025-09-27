@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="M.O.B. Fades - Barbería premium con fades elegantes. Agenda por WhatsApp.">
+    <title>M.O.B. Fades - Barbería Elegante</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; background: #FFFFFF; color: #000000; line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        header { background: #FFFFFF; border-bottom: 3px solid #000000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: background 0.3s; }
+        .logo { font-size: 2.5em; color: #007BFF; transition: transform 0.3s; }
+        .logo:hover { transform: scale(1.05); }
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: #000000; font-size: 1.1em; font-weight: 600; transition: color 0.3s, transform 0.3s; position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #007BFF; transition: width 0.3s; }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: #007BFF; transform: translateY(-2px); }
+        .hero { background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #FFFFFF; text-shadow: 2px 2px 4px #000000; position: relative; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,123,255,0.3), rgba(0,0,0,0.5)); }
+        .hero-content { z-index: 1; animation: fadeInUp 1.5s ease-out; }
+        .hero h1 { font-size: 4em; margin-bottom: 20px; animation: fadeInDown 1s ease-out 0.5s both; }
+        .hero p { font-size: 1.8em; margin-bottom: 30px; animation: fadeInUp 1s ease-out 1s both; }
+        .cta-btn { background: #007BFF; color: #FFFFFF; padding: 15px 30px; border: none; border-radius: 50px; font-size: 1.2em; font-weight: 600; text-decoration: none; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .cta-btn:hover { background: #0056b3; transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        section h2 { font-size: 2.5em; text-align: center; color: #007BFF; margin-bottom: 40px; animation: fadeIn 1s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .servicio { background: #FFFFFF; border: 2px solid #000000; border-radius: 10px; padding: 25px; text-align: center; transition: all 0.3s; opacity: 0; transform: translateY(30px); }
+        .servicio.visible { opacity: 1; transform: translateY(0); animation: slideInUp 0.6s ease-out; }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .servicio:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 10px 30px rgba(0,123,255,0.2); border-color: #007BFF; }
+        .servicio h3 { color: #007BFF; font-size: 1.5em; margin-bottom: 10px; }
+        .servicio p { color: #666; margin-bottom: 15px; }
+        .precio { font-size: 1.3em; font-weight: bold; color: #000000; }
+        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .galeria-item { position: relative; overflow: hidden; border: 2px solid #000000; border-radius: 10px; transition: transform 0.4s; }
+        .galeria-item img { width: 100%; height: 250px; object-fit: cover; transition: transform 0.4s; }
+        .galeria-item:hover img { transform: scale(1.1); }
+        .galeria-item::after { content: 'Ver Detalle'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #FFFFFF; font-size: 1.2em; background: rgba(0,123,255,0.8); padding: 10px 20px; border-radius: 5px; opacity: 0; transition: opacity 0.3s; }
+        .galeria-item:hover::after { opacity: 1; }
+        #contacto form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+        #contacto input, #contacto textarea { padding: 15px; border: 2px solid #000000; border-radius: 5px; font-family: 'Open Sans', sans-serif; transition: border-color 0.3s; }
+        #contacto input:focus, #contacto textarea:focus { border-color: #007BFF; outline: none; }
+        #contacto button { background: #007BFF; color: #FFFFFF; padding: 15px; border: none; border-radius: 5px; font-size: 1.1em; cursor: pointer; transition: background 0.3s; }
+        #contacto button:hover { background: #0056b3; }
+        footer { background: #000000; color: #FFFFFF; text-align: center; padding: 30px 20px; border-top: 3px solid #007BFF; }
+        .footer-content { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+        .footer-section h4 { color: #007BFF; margin-bottom: 10px; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #FFFFFF; text-decoration: none; transition: color 0.3s; }
+        .footer-section a:hover { color: #007BFF; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #25D366; color: white; border-radius: 50px; padding: 14px 18px; font-size: 16px; font-weight: bold; text-decoration: none; display: flex; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .whatsapp-float img { width: 24px; height: 24px; margin-right: 10px; }
+        .whatsapp-float:hover { transform: translateY(-2px); }
+        /* Media queries para responsive */
+        @media (max-width: 768px) { .hero h1 { font-size: 2.5em; } nav ul { flex-direction: column; gap: 10px; } .servicios { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">M.O.B. Fades</div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Bienvenido a M.O.B. Fades</h1>
+            <p>Estilo premium con fades elegantes y toque montañoso</p>
+            <a href="#contacto" class="cta-btn">Agenda Ahora</a>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="servicios">
+            <div class="servicio">
+                <h3>Fade Clásico</h3>
+                <p>Corte preciso y limpio para un look diario.</p>
+                <div class="precio">$30.000</div>
+            </div>
+            <div class="servicio">
+                <h3>Corte Moderno</h3>
+                <p>Estilos contemporáneos con detalles personalizados.</p>
+                <div class="precio">$40.000</div>
+            </div>
+            <div class="servicio">
+                <h3>Afeitado Premium</h3>
+                <p>Afeitado tradicional con productos de alta calidad.</p>
+                <div class="precio">$25.000</div>
+            </div>
+            <div class="servicio">
+                <h3>Tratamiento Capilar</h3>
+                <p>Nutrición y cuidado para cabello saludable.</p>
+                <div class="precio">$35.000</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria">
+        <h2>Galería de Trabajos</h2>
+        <div class="galeria">
+            <div class="galeria-item">
+                <img src="https://via.placeholder.com/300x250?text=Fade+1" alt="Corte 1">
+            </div>
+            <div class="galeria-item">
+                <img src="https://via.placeholder.com/300x250?text=Fade+2" alt="Corte 2">
+            </div>
+            <div class="galeria-item">
+                <img src="https://via.placeholder.com/300x250?text=Fade+3" alt="Corte 3">
+            </div>
+            <div class="galeria-item">
+                <img src="https://via.placeholder.com/300x250?text=Fade+4" alt="Corte 4">
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contáctanos</h2>
+        <p>Agenda tu cita fácilmente</p>
+        <form action="https://formspree.io/f/tu-email" method="POST"> <!-- Reemplaza con tu Formspree -->
+            <input type="text" name="nombre" placeholder="Tu Nombre" required>
+            <input type="tel" name="telefono" placeholder="Tu Teléfono" required>
+            <textarea name="mensaje" placeholder="Mensaje o cita deseada" rows="5" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Horarios</h4>
+                <ul>
+                    <li>Lun-Vie: 9am-7pm</li>
+                    <li>Sáb: 9am-5pm</li>
+                    <li>Dom: Cerrado</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li>WhatsApp: +57 300 757 9186</li>
+                    <li>Email: info@mobfades.com</li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2025 M.O.B. Fades. Todos los derechos reservados.</p>
+    </footer>
+
+    <a href="https://wa.me/573007579186?text=Hola,%20quiero%20una%20cita%20en%20M.O.B.%20Fades" target="_blank" class="whatsapp-float">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"> Chatear
+    </a>
+
+    <script>
+        // Script simple para animaciones al scroll (servicios)
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.servicio').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
